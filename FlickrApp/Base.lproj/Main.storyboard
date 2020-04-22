@@ -45,6 +45,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Flick" id="p8g-Qa-zRj"/>
                     <connections>
+                        <outlet property="tableView" destination="Cpv-H0-0BU" id="J7q-qB-4Le"/>
                         <segue destination="7bP-oO-IPz" kind="show" id="Zqr-qG-SUx"/>
                     </connections>
                 </viewController>

@@ -10,25 +10,57 @@ import UIKit
 
 class FlickVC: UIViewController {
 
-//    var flickData = [FlickData]()
-    var arr = ["1","2","3"]
+    var flickDatas: FlickData?
+    
+    let flickManager = FlickManager()
+    let url = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        fetchFlick()
+
+        self.tableView.reloadData()
     }
-
-
+    
+    
+    func fetchFlick() {
+        flickManager.fetchFlick(urlString: url) { [weak self](result) in
+            guard let this = self else {return}
+            switch result {
+            case .success(let flickData):
+                this.flickDatas = flickData
+                this.updateView(data: flickData)
+                this.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    func updateView(data: FlickData) {
+        print(data.items)
+        print("after \(flickDatas)")
+    }
+    
 }
+
+
+
+
 
 extension FlickVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arr.count
+        return flickDatas?.items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "flickCell", for: indexPath)
-        cell.textLabel?.text = arr[indexPath.row]
+        cell.textLabel?.text = flickDatas?.items[indexPath.row].link
+        
         return cell
     }
     
