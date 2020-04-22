@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1732A86824500EE300F89409 /* FlickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732A86724500EE300F89409 /* FlickCell.swift */; };
+		1732A86B24501D1400F89409 /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732A86A24501D1300F89409 /* WebViewVC.swift */; };
 		17499F52244F71060052041D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17499F51244F71060052041D /* AppDelegate.swift */; };
 		17499F54244F71060052041D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17499F53244F71060052041D /* SceneDelegate.swift */; };
 		17499F56244F71060052041D /* FlickVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17499F55244F71060052041D /* FlickVC.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1732A86724500EE300F89409 /* FlickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickCell.swift; sourceTree = "<group>"; };
+		1732A86A24501D1300F89409 /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = "<group>"; };
 		17499F4E244F71060052041D /* FlickrApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17499F51244F71060052041D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17499F53244F71060052041D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1732A86924500EE800F89409 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1732A86724500EE300F89409 /* FlickCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		17499F45244F71060052041D = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +111,9 @@
 		17499F6B244F722C0052041D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1732A86924500EE800F89409 /* Cell */,
 				17499F55244F71060052041D /* FlickVC.swift */,
+				1732A86A24501D1300F89409 /* WebViewVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,7 +251,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				17499F56244F71060052041D /* FlickVC.swift in Sources */,
+				1732A86824500EE300F89409 /* FlickCell.swift in Sources */,
 				17499F68244F71B80052041D /* FlickData.swift in Sources */,
+				1732A86B24501D1400F89409 /* WebViewVC.swift in Sources */,
 				17499F6A244F71C70052041D /* FlickManager.swift in Sources */,
 				17499F52244F71060052041D /* AppDelegate.swift in Sources */,
 				17499F54244F71060052041D /* SceneDelegate.swift in Sources */,

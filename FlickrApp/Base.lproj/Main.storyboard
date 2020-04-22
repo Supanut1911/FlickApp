@@ -19,13 +19,41 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="flickCell" rowHeight="211" id="uyN-Pc-p9Y">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="211"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="275" id="uyN-Pc-p9Y" customClass="FlickCell" customModule="FlickrApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="275"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uyN-Pc-p9Y" id="bgJ-G8-QDP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cowX" translatesAutoresizingMaskIntoConstraints="NO" id="Ugi-yD-2z4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="169"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="169" id="nk6-LG-zoC"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsD-gn-mLB">
+                                                    <rect key="frame" x="42" y="185" width="330" height="66"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.20137301090000001" green="0.77811867000000001" blue="0.99610513450000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="Ugi-yD-2z4" firstAttribute="top" secondItem="bgJ-G8-QDP" secondAttribute="top" id="JU4-rP-upk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="UsD-gn-mLB" secondAttribute="trailing" constant="22" id="Qax-Rk-h3J"/>
+                                                <constraint firstItem="UsD-gn-mLB" firstAttribute="top" secondItem="Ugi-yD-2z4" secondAttribute="bottom" constant="16" id="RJZ-qH-lQZ"/>
+                                                <constraint firstItem="UsD-gn-mLB" firstAttribute="leading" secondItem="bgJ-G8-QDP" secondAttribute="leadingMargin" constant="22" id="Slz-vD-wqR"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ugi-yD-2z4" secondAttribute="trailing" id="Wxw-jM-rZi"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UsD-gn-mLB" secondAttribute="bottom" constant="13" id="cr3-s0-VnM"/>
+                                                <constraint firstItem="Ugi-yD-2z4" firstAttribute="leading" secondItem="bgJ-G8-QDP" secondAttribute="leading" id="fqC-d8-QxS"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="linkLabel" destination="UsD-gn-mLB" id="CRB-1r-15F"/>
+                                            <outlet property="mainImageView" destination="Ugi-yD-2z4" id="8Bc-tl-tFP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -46,28 +74,47 @@
                     <navigationItem key="navigationItem" title="Flick" id="p8g-Qa-zRj"/>
                     <connections>
                         <outlet property="tableView" destination="Cpv-H0-0BU" id="J7q-qB-4Le"/>
-                        <segue destination="7bP-oO-IPz" kind="show" id="Zqr-qG-SUx"/>
+                        <segue destination="7bP-oO-IPz" kind="show" identifier="goToLink" id="Zqr-qG-SUx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="119.86607142857142"/>
         </scene>
-        <!--View Controller-->
+        <!--Web ViewVC-->
         <scene sceneID="PJt-QI-0PF">
             <objects>
-                <viewController id="7bP-oO-IPz" sceneMemberID="viewController">
+                <viewController id="7bP-oO-IPz" customClass="WebViewVC" customModule="FlickrApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXg-vt-fIj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsT-jW-K5g">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fsT-jW-K5g" secondAttribute="bottom" id="0Ap-lg-9JA"/>
+                            <constraint firstItem="fsT-jW-K5g" firstAttribute="leading" secondItem="v4B-kw-WYF" secondAttribute="leading" id="IHJ-uR-76k"/>
+                            <constraint firstItem="fsT-jW-K5g" firstAttribute="trailing" secondItem="v4B-kw-WYF" secondAttribute="trailing" id="Ss1-Ri-s7X"/>
+                            <constraint firstItem="fsT-jW-K5g" firstAttribute="top" secondItem="v4B-kw-WYF" secondAttribute="top" id="WtO-gp-A9T"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="v4B-kw-WYF"/>
                     </view>
                     <navigationItem key="navigationItem" id="6LT-Y8-Bix"/>
+                    <connections>
+                        <outlet property="webView" destination="fsT-jW-K5g" id="SwV-vV-W37"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCQ-xI-JLL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1923" y="120"/>
+            <point key="canvasLocation" x="1921.7391304347827" y="119.86607142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gdm-uj-50z">
@@ -92,4 +139,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="119.86607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cowX" width="782" height="600"/>
+    </resources>
 </document>

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FlickVC: UIViewController {
 
     var flickDatas: FlickData?
+    var selectCellIndex: Int = 0
     
     let flickManager = FlickManager()
     let url = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
@@ -23,6 +25,7 @@ class FlickVC: UIViewController {
         fetchFlick()
 
         self.tableView.reloadData()
+        
     }
     
     
@@ -42,8 +45,7 @@ class FlickVC: UIViewController {
     }
     
     func updateView(data: FlickData) {
-        print(data.items)
-        print("after \(flickDatas)")
+        
     }
     
 }
@@ -58,16 +60,32 @@ extension FlickVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "flickCell", for: indexPath)
-        cell.textLabel?.text = flickDatas?.items[indexPath.row].link
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! FlickCell
         
+        let url = URL(string: flickDatas?.items[indexPath.row].media.m ?? "")
+        cell.mainImageView.kf.setImage(with: url)
+        
+        cell.linkLabel.text = flickDatas?.items[indexPath.row].link
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     
 }
 
 extension FlickVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToLink", sender: self)
+        selectCellIndex = indexPath.row
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? WebViewVC {
+            destination.linkUrl = flickDatas?.items[selectCellIndex].link ?? ""
+        }
+    }
 }
 
