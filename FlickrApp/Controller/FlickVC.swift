@@ -41,8 +41,11 @@ class FlickVC: UIViewController {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-       fetchFlick()
-        refreshControl.endRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.fetchFlick()
+            self.refreshControl.endRefreshing()
+        }
+       
     }
     
     func storeLocalStorage(image: String, link: String) {
