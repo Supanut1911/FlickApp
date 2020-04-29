@@ -8,4 +8,5 @@ target 'FlickrApp' do
   # Pods for FlickrApp
 	pod 'Kingfisher'
 	pod 'Alamofire'
+  pod 'RealmSwift'
 end

@@ -8,12 +8,15 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class FlickVC: UIViewController {
 
     var flickDatas: FlickData?
+    var flickStoreDatas: Results<FlickRealmData>!
     var selectCellIndex: Int = 0
-    
+
+    let realm = try! Realm()
     let flickManager = FlickManager()
     let url = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
     
@@ -22,12 +25,35 @@ class FlickVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchFlick()
-
-        self.tableView.reloadData()
+        
+        
+        if CheckInternet.Connection() {
+            print("connect")
+            fetchFlick()
+        } else {
+            print("not connect")
+            loadData()
+        }
+        
         
     }
     
+    func storeLocalStorage(image: String, link: String) {
+        let newRecord = FlickRealmData()
+        newRecord.storeImage = image
+        newRecord.storeLink = link
+        do {
+            try self.realm.write {
+                realm.add(newRecord)
+            }
+        } catch {
+            print("Can not save image & link to local Storage")
+        }
+    }
+    
+    func loadData() {
+        flickStoreDatas = realm.objects(FlickRealmData.self)
+    }
     
     func fetchFlick() {
         flickManager.fetchFlick(urlString: url) { [weak self](result) in
@@ -35,7 +61,11 @@ class FlickVC: UIViewController {
             switch result {
             case .success(let flickData):
                 this.flickDatas = flickData
-                this.updateView(data: flickData)
+//                this.flickStoreData?.storeImage = flickData.items
+//                this.updateView(data: flickData)
+                
+//                self?.storeLocalStorage(image: this.flickDatas?.items,
+//                                  link: this.flickDatas?.items.first?.link ?? "")
                 this.tableView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -44,36 +74,41 @@ class FlickVC: UIViewController {
         
     }
     
-    func updateView(data: FlickData) {
-        
-    }
+    
     
 }
 
 
-
-
-
 extension FlickVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flickDatas?.items.count ?? 0
+        if CheckInternet.Connection() {
+            return flickDatas?.items.count ?? 0
+        } else {
+            return flickStoreDatas.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! FlickCell
-        
-        let url = URL(string: flickDatas?.items[indexPath.row].media.m ?? "")
-        cell.mainImageView.kf.setImage(with: url)
-        
-        cell.linkLabel.text = flickDatas?.items[indexPath.row].link
+        if CheckInternet.Connection() {
+            let url = URL(string: flickDatas?.items[indexPath.row].media.m ?? "")
+            cell.mainImageView.kf.setImage(with: url)
+            cell.linkLabel.text = flickDatas?.items[indexPath.row].link
+            self.storeLocalStorage(image: flickDatas?.items[indexPath.row].media.m ?? "",
+                                   link: flickDatas?.items[indexPath.row].link ?? "")
+
+        } else {
+            let url = URL(string: flickStoreDatas[indexPath.row].storeImage)
+            cell.mainImageView.kf.setImage(with: url)
+            cell.linkLabel.text = flickStoreDatas[indexPath.row].storeLink
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    
 }
 
 extension FlickVC: UITableViewDelegate {

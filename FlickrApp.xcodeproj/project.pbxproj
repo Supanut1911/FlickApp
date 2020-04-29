@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1732A86824500EE300F89409 /* FlickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732A86724500EE300F89409 /* FlickCell.swift */; };
 		1732A86B24501D1400F89409 /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732A86A24501D1300F89409 /* WebViewVC.swift */; };
+		1732A86D24585BB900F89409 /* FlickRealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732A86C24585BB900F89409 /* FlickRealmData.swift */; };
+		1732A86F245867A600F89409 /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732A86E245867A600F89409 /* CheckInternet.swift */; };
 		17499F52244F71060052041D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17499F51244F71060052041D /* AppDelegate.swift */; };
 		17499F54244F71060052041D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17499F53244F71060052041D /* SceneDelegate.swift */; };
 		17499F56244F71060052041D /* FlickVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17499F55244F71060052041D /* FlickVC.swift */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		1732A86724500EE300F89409 /* FlickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickCell.swift; sourceTree = "<group>"; };
 		1732A86A24501D1300F89409 /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = "<group>"; };
+		1732A86C24585BB900F89409 /* FlickRealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickRealmData.swift; sourceTree = "<group>"; };
+		1732A86E245867A600F89409 /* CheckInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 		17499F4E244F71060052041D /* FlickrApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17499F51244F71060052041D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17499F53244F71060052041D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 				17499F5A244F71070052041D /* Assets.xcassets */,
 				17499F5C244F71070052041D /* LaunchScreen.storyboard */,
 				17499F5F244F71070052041D /* Info.plist */,
+				1732A86E245867A600F89409 /* CheckInternet.swift */,
 			);
 			path = FlickrApp;
 			sourceTree = "<group>";
@@ -96,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				17499F67244F71B80052041D /* FlickData.swift */,
+				1732A86C24585BB900F89409 /* FlickRealmData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,8 +257,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				17499F56244F71060052041D /* FlickVC.swift in Sources */,
+				1732A86F245867A600F89409 /* CheckInternet.swift in Sources */,
 				1732A86824500EE300F89409 /* FlickCell.swift in Sources */,
 				17499F68244F71B80052041D /* FlickData.swift in Sources */,
+				1732A86D24585BB900F89409 /* FlickRealmData.swift in Sources */,
 				1732A86B24501D1400F89409 /* WebViewVC.swift in Sources */,
 				17499F6A244F71C70052041D /* FlickManager.swift in Sources */,
 				17499F52244F71060052041D /* AppDelegate.swift in Sources */,
