@@ -15,7 +15,8 @@ class FlickVC: UIViewController {
     var flickDatas: FlickData?
     var flickStoreDatas: Results<FlickRealmData>!
     var selectCellIndex: Int = 0
-
+    var refreshControl = UIRefreshControl()
+    
     let realm = try! Realm()
     let flickManager = FlickManager()
     let url = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
@@ -25,7 +26,8 @@ class FlickVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
         
         if CheckInternet.Connection() {
             print("connect")
@@ -36,6 +38,11 @@ class FlickVC: UIViewController {
         }
         
         
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+       fetchFlick()
+        refreshControl.endRefreshing()
     }
     
     func storeLocalStorage(image: String, link: String) {
